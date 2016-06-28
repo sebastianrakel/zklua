@@ -18,7 +18,7 @@ endif
 
 CC = gcc
 CFLAGS = `pkg-config --cflags $(LUA_VERSION)` -fPIC -O2 #-Wall
-INSTALL_PATH = $(shell pkg-config $(LUA_VERSION) --variable=libdir)/$(LUA_VERSION)/$(LUA_VERSION_NUMBER)
+INSTALL_PATH = $(shell pkg-config $(LUA_VERSION) --variable=libdir)/lua/$(LUA_VERSION_NUMBER)
 
 OS_NAME = $(shell uname -s)
 MH_NAME = $(shell uname -m)
