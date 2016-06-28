@@ -4,13 +4,17 @@ all: zklua.so
 # your system, here are the descriptions of these variables:
 #
 # ZOOKEEPER_LIB_DIR: Zookeeper C API library path.
-# LUA_LIB_DIR: Lua library path.
 # LUA_VERSION: Lua version.
 # LUA_VERSION_NUMBER: Lua version number.
 ZOOKEEPER_LIB_DIR = /usr/local/lib
-LUA_LIB_DIR = /usr/local/lib/lua
+
+ifndef LUA_VERSION
 LUA_VERSION = lua
-LUA_VERSION_NUMBER = 5.1
+endif
+
+ifndef LUA_VERSION_NUMBER
+LUA_VERSION_NUMBER = 5.3
+endif
 
 CC = gcc
 CFLAGS = `pkg-config --cflags $(LUA_VERSION)` -fPIC -O2 #-Wall
