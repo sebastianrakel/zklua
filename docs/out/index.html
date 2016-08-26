@@ -1,0 +1,2266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>ZKlua Documentation</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ZKlua</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>zklua</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>zklua</code></h1>
+<p>Lua binding of Apache Zookeeper.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#wather_fn">wather_fn (zh, type, state, path, watcherctx)</a></td>
+	<td class="summary">signature of a watcher function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#void_completion">void_completion (rc, data)</a></td>
+	<td class="summary">signature of a void completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stat_completion">stat_completion (rc, stat, data)</a></td>
+	<td class="summary">signature of a stat completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#data_completion">data_completion (rc, value, stat, data)</a></td>
+	<td class="summary">signature of a data completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#strings_completion">strings_completion (rc, strings, data)</a></td>
+	<td class="summary">signature of a strings completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#strings_stat_completion">strings_stat_completion (rc, strings, stat, data)</a></td>
+	<td class="summary">signature of a strings and stat completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#string_completion">string_completion (rc, value, data)</a></td>
+	<td class="summary">signature of a string completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#acl_completion">acl_completion (rc, acl, stat, data)</a></td>
+	<td class="summary">signature of a ACL completion function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#init">init (host, watcher_fn, recv_timeout, clientid, context, flags)</a></td>
+	<td class="summary">create a zookeeper handle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#close">close (zh)</a></td>
+	<td class="summary">close the zookeeper handle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#client_id">client_id (zh)</a></td>
+	<td class="summary">return the client session id.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#recv_timeout">recv_timeout (zh)</a></td>
+	<td class="summary">return the timeout for this session.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_context">get_context (zh)</a></td>
+	<td class="summary">return the context for this handle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set_context">set_context (zh, context)</a></td>
+	<td class="summary">set the context for this handle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set_watcher">set_watcher (zh, newfn)</a></td>
+	<td class="summary">set a watcher function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_connected_host">get_connected_host (zh)</a></td>
+	<td class="summary">return the socket address.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#adelete">adelete (zh, path, version, void_completion, data)</a></td>
+	<td class="summary">delete a node in zookeeper.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aexists">aexists (zh, path, watch, stat_completion, data)</a></td>
+	<td class="summary">checks the existence of a node in zookeeper.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#awexists">awexists (zh, path, watcher_fn, watcherctx, stat_completion, data)</a></td>
+	<td class="summary">checks the existence of a node in zookeeper.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aget">aget (zh, path, watch, data_completion, data)</a></td>
+	<td class="summary">gets the data associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#awget">awget (zh, path, watcher_fn, watcherctx, data_completion, data)</a></td>
+	<td class="summary">gets the data associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aset">aset (zh, path, buffer, version, stat_completion, data)</a></td>
+	<td class="summary">sets the data associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aget_children">aget_children (zh, path, watch, strings_completion, data)</a></td>
+	<td class="summary">lists the children of a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#awget_children">awget_children (zh, path, watcher_fn, watcherctx, strings_completion, data)</a></td>
+	<td class="summary">lists the children of a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#awget_children2">awget_children2 (zh, path, watcher_fn, watcherctx, strings_stat_completion, data)</a></td>
+	<td class="summary">lists the children of a node, and get the parent stat.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#async">async (zh, path, string_completion, data)</a></td>
+	<td class="summary">Flush leader channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aget_acl">aget_acl (zh, path, acl_completion, data)</a></td>
+	<td class="summary">gets the acl associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#aset_acl">aset_acl (zh, path, version, acl, void_completion, data)</a></td>
+	<td class="summary">sets the acl associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#zerror">zerror (c)</a></td>
+	<td class="summary">return an error string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#add_auth">add_auth (zh, scheme, cert, void_completion, data)</a></td>
+	<td class="summary">specify application credentials.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#is_unrecoverable">is_unrecoverable (zh)</a></td>
+	<td class="summary">checks if the current zookeeper connection state can't be recovered.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set_debug_level">set_debug_level (loglevel)</a></td>
+	<td class="summary">sets the debugging level for the library.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set_log_stream">set_log_stream (stream)</a></td>
+	<td class="summary">sets the stream to be used by the library for logging</p>
+
+<p>The zookeeper library uses stderr as its default log stream.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deterministic_conn_order">deterministic_conn_order (yesorno)</a></td>
+	<td class="summary">enable/disable quorum endpoint order randomization.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#create">create (zh, path, acl, flags)</a></td>
+	<td class="summary">create a node synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#delete">delete (zh, path, version)</a></td>
+	<td class="summary">delete a node in zookeeper synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#exists">exists (zh, path, watch)</a></td>
+	<td class="summary">checks the existence of a node in zookeeper synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wexists">wexists (zh, path, watcher_fn, watcherctx)</a></td>
+	<td class="summary">checks the existence of a node in zookeeper synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get">get (zh, path, watch)</a></td>
+	<td class="summary">gets the data associated with a node synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wget">wget (zh, path, watcher_fn, watcherctx)</a></td>
+	<td class="summary">gets the data associated with a node synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set">set (zh, path, buffer, version)</a></td>
+	<td class="summary">sets the data associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set2">set2 (zh, path, buffer, buflen, version)</a></td>
+	<td class="summary">sets the data associated with a node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_children">get_children (zh, path, watch, strings)</a></td>
+	<td class="summary">lists the children of a node synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wget_children">wget_children (zh, path, watcher_fn, watcherctx)</a></td>
+	<td class="summary">lists the children of a node synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_children2">get_children2 (zh, path, watch)</a></td>
+	<td class="summary">lists the children of a node and get its stat synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wget_children2">wget_children2 (zh, path, watcher_fn, watcherctx)</a></td>
+	<td class="summary">lists the children of a node and get its stat synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_acl">get_acl (zh, path)</a></td>
+	<td class="summary">gets the acl associated with a node synchronously.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#set_acl">set_acl (zh, path, version, acl)</a></td>
+	<td class="summary">sets the acl associated with a node synchronously.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "wather_fn"></a>
+    <strong>wather_fn (zh, type, state, path, watcherctx)</strong>
+    </dt>
+    <dd>
+    signature of a watcher function. </p>
+
+<p>There are two ways to receive watch notifications: legacy and watcher object.
+The legacy style, an application wishing to receive events from ZooKeeper must
+first implement a function with this signature and pass a pointer to the
+function to init.</p>
+
+<p>Next, the application sets a watch by calling one of the getter API
+that accept the watch integer flag (for example,  aexists,  get, etc).</p>
+
+<p>The watcher object style uses an instance of a "watcher object" which in
+the C world is represented by a pair: a pointer to a function implementing this
+signature and a pointer to watcher context -- handback user-specific data.
+When a watch is triggered this function will be called along with
+the watcher context. An application wishing to use this style must use
+the getter API functions with the "w" prefix in their names (
+for example,  awexists,  wget, etc).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         zookeeper handle.
+        </li>
+        <li><span class="parameter">type</span>
+         event type. This is one of the *_EVENT constants.
+        </li>
+        <li><span class="parameter">state</span>
+         connection state. The state value will be one of the *_STATE constants.
+        </li>
+        <li><span class="parameter">path</span>
+         znode path for which the watcher is triggered. NULL if the event type is ZOO<em>SESSION</em>EVENT.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         watcher context.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "void_completion"></a>
+    <strong>void_completion (rc, data)</strong>
+    </dt>
+    <dd>
+    signature of a void completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "stat_completion"></a>
+    <strong>stat_completion (rc, stat, data)</strong>
+    </dt>
+    <dd>
+    signature of a stat completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">stat</span>
+         a pointer to the stat information for the node involved
+in this function. If a non zero error code is returned, the content of stat
+is undefined. The programmer is NOT responsible for freeing stat.
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "data_completion"></a>
+    <strong>data_completion (rc, value, stat, data)</strong>
+    </dt>
+    <dd>
+    signature of a data completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">value</span>
+         the value of the information returned by the asynchronous call.
+If a non zero error code is returned, the content of value is undefined.
+The programmer is NOT responsible for freeing value.
+        </li>
+        <li><span class="parameter">stat</span>
+         a pointer to the stat information for the node involved in
+this function. If a non zero error code is returned, the content of
+stat is undefined. The programmer is NOT responsible for freeing stat.
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "strings_completion"></a>
+    <strong>strings_completion (rc, strings, data)</strong>
+    </dt>
+    <dd>
+    signature of a strings completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">strings</span>
+         a pointer to the structure containng the list of strings of the
+names of the children of a node. If a non zero error code is returned,
+the content of strings is undefined. The programmer is NOT responsible
+for freeing strings.
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "strings_stat_completion"></a>
+    <strong>strings_stat_completion (rc, strings, stat, data)</strong>
+    </dt>
+    <dd>
+    signature of a strings and stat completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">strings</span>
+         a pointer to the structure containng the list of strings of the
+names of the children of a node. If a non zero error code is returned,
+the content of strings is undefined. The programmer is NOT responsible
+for freeing strings.
+        </li>
+        <li><span class="parameter">stat</span>
+         a pointer to the stat information for the node involved in
+this function. If a non zero error code is returned, the content of
+stat is undefined. The programmer is NOT responsible for freeing stat.
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data
+pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "string_completion"></a>
+    <strong>string_completion (rc, value, data)</strong>
+    </dt>
+    <dd>
+    signature of a string completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">value</span>
+         the value of the string returned.
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "acl_completion"></a>
+    <strong>acl_completion (rc, acl, stat, data)</strong>
+    </dt>
+    <dd>
+    signature of a ACL completion function. </p>
+
+<p>This method will be invoked at the end of a asynchronous call and also as
+a result of connection loss or timeout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rc</span>
+         the error code of the call. Connection loss/timeout triggers
+the completion with one of the following error codes:
+ZCONNECTIONLOSS -- lost connection to the server
+ZOPERATIONTIMEOUT -- connection timed out
+Data related events trigger the completion with error codes listed the
+Exceptions section of the documentation of the function that initiated the
+call. (Zero indicates call was successful.)
+        </li>
+        <li><span class="parameter">acl</span>
+         a pointer to the structure containng the ACL of a node. If a non
+zero error code is returned, the content of strings is undefined. The
+programmer is NOT responsible for freeing acl.
+        </li>
+        <li><span class="parameter">stat</span>
+         a pointer to the stat information for the node involved in
+this function. If a non zero error code is returned, the content of
+stat is undefined. The programmer is NOT responsible for freeing stat.
+        </li>
+        <li><span class="parameter">data</span>
+         the pointer that was passed by the caller when the function
+that this completion corresponds to was invoked. The programmer
+is responsible for any memory freeing associated with the data pointer.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "init"></a>
+    <strong>init (host, watcher_fn, recv_timeout, clientid, context, flags)</strong>
+    </dt>
+    <dd>
+    create a zookeeper handle.
+The handle is used to communicate with zookeeper.
+This method creates a new handle and a zookeeper session that corresponds
+to that handle. Session establishment is asynchronous, meaning that the
+session should not be considered established until (and unless) an
+event of state ZOO<em>CONNECTED</em>STATE is received.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         comma separated host:port pairs, each corresponding to a zk server.
+e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         the global watcher callback function. When notifications are
+triggered this function will be invoked.
+        </li>
+        <li><span class="parameter">recv_timeout</span>
+         the recv timeout.
+        </li>
+        <li><span class="parameter">clientid</span>
+         the id of a previously established session that this
+client will be reconnecting to. Pass 0 if not reconnecting to a previous
+session. Clients can access the session id of an established, valid,
+connection by calling  client<em>id. If the session corresponding to
+the specified clientid has expired, or if the clientid is invalid for
+any reason, the returned zhandle</em>t will be invalid -- the zhandle<em>t
+state will indicate the reason for failure (typically ZOO</em>EXPIRED<em>SESSION</em>STATE).
+        </li>
+        <li><span class="parameter">context</span>
+         the handback object that will be associated with this instance
+of zhandle<em>t. Application can access it (for example, in the watcher callback)
+using  get</em>context. The object is not used by zookeeper internally and can be null.
+        </li>
+        <li><span class="parameter">flags</span>
+         reserved for future use. Should be set to zero.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a pointer to the opaque zhandle structure. If it fails to create a new zhandle the function returns NULL and the errno variable indicates the reason.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "close"></a>
+    <strong>close (zh)</strong>
+    </dt>
+    <dd>
+    close the zookeeper handle. </p>
+
+<p>After this call, the client session will no longer be valid. The function
+will flush any outstanding send requests before return. As a result it may block.</p>
+
+<p>This method should only be called only once on a zookeeper handle. Calling
+twice will cause undefined (and probably undesirable behavior). Calling any other
+zookeeper method after calling close is undefined behaviour and should be avoided.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         a result code, regardless of the error code returned, the zhandle will be destroyed and all resources freed.</p>
+
+<p>ZOK - success
+ZBADARGUMENTS - invalid input parameters
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+ZOPERATIONTIMEOUT - failed to flush the buffers within the specified timeout.
+ZCONNECTIONLOSS - a network error occured while attempting to send request to server.
+ZSYSTEMERROR -- a system (OS) error occured; it's worth checking errno to get details.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client_id"></a>
+    <strong>client_id (zh)</strong>
+    </dt>
+    <dd>
+    return the client session id.
+only valid if the connections is currently connected (ie. last watcher state is ZOO<em>CONNECTED</em>STATE).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "recv_timeout"></a>
+    <strong>recv_timeout (zh)</strong>
+    </dt>
+    <dd>
+    return the timeout for this session.
+only valid if the connections is currently connected (ie. last watcher state is ZOO<em>CONNECTED</em>STATE).
+This value may change after a server re-connect.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_context"></a>
+    <strong>get_context (zh)</strong>
+    </dt>
+    <dd>
+    return the context for this handle.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set_context"></a>
+    <strong>set_context (zh, context)</strong>
+    </dt>
+    <dd>
+    set the context for this handle.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+
+
+
+        </li>
+        <li><span class="parameter">context</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set_watcher"></a>
+    <strong>set_watcher (zh, newfn)</strong>
+    </dt>
+    <dd>
+    set a watcher function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+
+
+
+        </li>
+        <li><span class="parameter">newfn</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        previous watcher function.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_connected_host"></a>
+    <strong>get_connected_host (zh)</strong>
+    </dt>
+    <dd>
+    return the socket address.
+only valid if the current connection is alive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        socket address of the connected host or NULL on failure, only valid if the connection is current connected.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "adelete"></a>
+    <strong>adelete (zh, path, version, void_completion, data)</strong>
+    </dt>
+    <dd>
+    delete a node in zookeeper.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the node. The function will fail if the
+actual version of the node does not match the expected version.
+If -1 is used the version check will not take place.
+        </li>
+        <li><span class="parameter">void_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADVERSION expected version does not match actual version.
+ZNOTEMPTY children are present; node cannot be deleted.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "aexists"></a>
+    <strong>aexists (zh, path, watch, stat_completion, data)</strong>
+    </dt>
+    <dd>
+    checks the existence of a node in zookeeper.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify the
+client if the node changes. The watch will be set even if the node does not
+exist. This allows clients to watch for nodes to appear.
+        </li>
+        <li><span class="parameter">stat_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when the
+function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awexists"></a>
+    <strong>awexists (zh, path, watcher_fn, watcherctx, stat_completion, data)</strong>
+    </dt>
+    <dd>
+    checks the existence of a node in zookeeper. </p>
+
+<p>This function is similar to  axists except it allows one specify
+a watcher object - a function pointer and associated context. The function
+will be called once the watch has fired. The associated context data will be
+passed to the function as the watcher context parameter.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null a watch will set on the specified znode on the server.
+The watch will be set even if the node does not exist. This allows clients
+to watch for nodes to appear.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+        <li><span class="parameter">stat_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when the
+function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "aget"></a>
+    <strong>aget (zh, path, watch, data_completion, data)</strong>
+    </dt>
+    <dd>
+    gets the data associated with a node.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">data_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either in ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awget"></a>
+    <strong>awget (zh, path, watcher_fn, watcherctx, data_completion, data)</strong>
+    </dt>
+    <dd>
+    gets the data associated with a node. </p>
+
+<p>This function is similar to  aget except it allows one specify
+a watcher object rather than a boolean watch flag.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+        <li><span class="parameter">data_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either in ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "aset"></a>
+    <strong>aset (zh, path, buffer, version, stat_completion, data)</strong>
+    </dt>
+    <dd>
+    sets the data associated with a node.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">buffer</span>
+         the buffer holding data to be written to the node.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the node. The function will fail if
+the actual version of the node does not match the expected version. If -1 is
+used the version check will not take place. * completion: If null,
+the function will execute synchronously. Otherwise, the function will return
+immediately and invoke the completion routine when the request completes.
+        </li>
+        <li><span class="parameter">stat_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADVERSION expected version does not match actual version.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "aget_children"></a>
+    <strong>aget_children (zh, path, watch, strings_completion, data)</strong>
+    </dt>
+    <dd>
+    lists the children of a node.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">strings_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awget_children"></a>
+    <strong>awget_children (zh, path, watcher_fn, watcherctx, strings_completion, data)</strong>
+    </dt>
+    <dd>
+    lists the children of a node. </p>
+
+<p>This function is similar to  aget_children except it allows one specify
+a watcher object rather than a boolean watch flag.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+        <li><span class="parameter">strings_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awget_children2"></a>
+    <strong>awget_children2 (zh, path, watcher_fn, watcherctx, strings_stat_completion, data)</strong>
+    </dt>
+    <dd>
+    lists the children of a node, and get the parent stat. </p>
+
+<p>This function is similar to  aget_children2 except it allows one specify
+a watcher object rather than a boolean watch flag.</p>
+
+<p>This function is new in version 3.3.0
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+        <li><span class="parameter">strings_stat_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "async"></a>
+    <strong>async (zh, path, string_completion, data)</strong>
+    </dt>
+    <dd>
+    Flush leader channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">string_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "aget_acl"></a>
+    <strong>aget_acl (zh, path, acl_completion, data)</strong>
+    </dt>
+    <dd>
+    gets the acl associated with a node.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">acl_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "aset_acl"></a>
+    <strong>aset_acl (zh, path, version, acl, void_completion, data)</strong>
+    </dt>
+    <dd>
+    sets the acl associated with a node.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the path.
+        </li>
+        <li><span class="parameter">acl</span>
+         the acl to be set on the path.
+        </li>
+        <li><span class="parameter">void_completion</span>
+         the routine to invoke when the request completes. The completion
+will be triggered with one of the following codes passed in as the rc argument:
+ZOK operation completed successfully
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZINVALIDACL invalid ACL specified
+ZBADVERSION expected version does not match actual version.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when
+the function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "zerror"></a>
+    <strong>zerror (c)</strong>
+    </dt>
+    <dd>
+    return an error string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+         return code
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string corresponding to the return code
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "add_auth"></a>
+    <strong>add_auth (zh, scheme, cert, void_completion, data)</strong>
+    </dt>
+    <dd>
+    specify application credentials. </p>
+
+<p>The application calls this function to specify its credentials for purposes
+of authentication. The server will use the security provider specified by
+the scheme parameter to authenticate the client connection. If the
+authentication request has failed:
+ the server connection is dropped
+ the watcher is called with the ZOO<em>AUTH</em>FAILED_STATE value as the state
+parameter.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">scheme</span>
+         the id of authentication scheme. Natively supported:
+"digest" password-based authentication
+        </li>
+        <li><span class="parameter">cert</span>
+         application credentials. The actual value depends on the scheme.
+        </li>
+        <li><span class="parameter">void_completion</span>
+         the routine to invoke when the request completes. One of
+the following result codes may be passed into the completion callback:
+ZOK operation completed successfully.
+ZAUTHFAILED authentication failed.
+        </li>
+        <li><span class="parameter">data</span>
+         the data that will be passed to the completion routine when the
+function completes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         ZOK on success or one of the following errcodes on failure:
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+ZSYSTEMERROR - a system error occured.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_unrecoverable"></a>
+    <strong>is_unrecoverable (zh)</strong>
+    </dt>
+    <dd>
+    checks if the current zookeeper connection state can't be recovered. </p>
+
+<p>The application must close the zhandle and try to reconnect.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle ( init)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        ZINVALIDSTATE if connection is unrecoverable
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set_debug_level"></a>
+    <strong>set_debug_level (loglevel)</strong>
+    </dt>
+    <dd>
+    sets the debugging level for the library.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">loglevel</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set_log_stream"></a>
+    <strong>set_log_stream (stream)</strong>
+    </dt>
+    <dd>
+    sets the stream to be used by the library for logging</p>
+
+<p>The zookeeper library uses stderr as its default log stream.  Application
+must make sure the stream is writable. Passing in NULL resets the stream
+to its default value (stderr).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">stream</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "deterministic_conn_order"></a>
+    <strong>deterministic_conn_order (yesorno)</strong>
+    </dt>
+    <dd>
+    enable/disable quorum endpoint order randomization. </p>
+
+<p>Note: typically this method should NOT be used outside of testing.</p>
+
+<p>If passed a non-zero value, will make the client connect to quorum peers
+in the order as specified in the init() call.
+A zero value causes init() to permute the peer endpoints
+which is good for more even client connection distribution among the
+quorum peers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">yesorno</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "create"></a>
+    <strong>create (zh, path, acl, flags)</strong>
+    </dt>
+    <dd>
+    create a node synchronously. </p>
+
+<p>This method will create a node in ZooKeeper. A node can only be created if
+it does not already exists. The Create Flags affect the creation of nodes.
+If ZOO<em>EPHEMERAL flag is set, the node will automatically get removed if the
+client session goes away. If the ZOO</em>SEQUENCE flag is set, a unique
+monotonically increasing sequence number is appended to the path name.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         The name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">acl</span>
+         The initial ACL of the node. The ACL must not be null or empty.
+        </li>
+        <li><span class="parameter">flags</span>
+         this parameter can be set to 0 for normal create or an OR
+of the Create Flags
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1).one of the following codes are returned, 2) path buffer of the node:
+ZOK operation completed successfully.
+ZNONODE the parent node does not exist.
+ZNODEEXISTS the node already exists.
+ZNOAUTH the client does not have permission.
+ZNOCHILDRENFOREPHEMERALS cannot create children of ephemeral nodes.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "delete"></a>
+    <strong>delete (zh, path, version)</strong>
+    </dt>
+    <dd>
+    delete a node in zookeeper synchronously.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the node. The function will fail if the
+   actual version of the node does not match the expected version.
+ If -1 is used the version check will not take place.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         one of the following values is returned.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADVERSION expected version does not match actual version.
+ZNOTEMPTY children are present; node cannot be deleted.
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "exists"></a>
+    <strong>exists (zh, path, watch)</strong>
+    </dt>
+    <dd>
+    checks the existence of a node in zookeeper synchronously.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify the
+client if the node changes. The watch will be set even if the node does not
+exist. This allows clients to watch for nodes to appear.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): return code of the function call, 2): stat struct fo the ZNode.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wexists"></a>
+    <strong>wexists (zh, path, watcher_fn, watcherctx)</strong>
+    </dt>
+    <dd>
+    checks the existence of a node in zookeeper synchronously. </p>
+
+<p>This function is similar to  exists except it allows one specify
+a watcher object rather than a boolean watch flag.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null a watch will set on the specified znode on the server.
+The watch will be set even if the node does not exist. This allows clients
+to watch for nodes to appear.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): return code of the function call, 2): stat struc of the ZNode.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get"></a>
+    <strong>get (zh, path, watch)</strong>
+    </dt>
+    <dd>
+    gets the data associated with a node synchronously.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify
+the client if the node changes.
+It'll be set to the actual data length upon return. If the data is NULL, length is -1.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): return value of the function call, 2): value buffer containing the node data, 3): stat struct of the ZNode.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters
+ZINVALIDSTATE - zhandle state is either in ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wget"></a>
+    <strong>wget (zh, path, watcher_fn, watcherctx)</strong>
+    </dt>
+    <dd>
+    gets the data associated with a node synchronously. </p>
+
+<p>This function is similar to  get except it allows one specify
+a watcher object rather than a boolean watch flag.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+It'll be set to the actual data length upon return. If the data is NULL, length is -1.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): return value of the function call, 2): buffer holding the node data, 3): stat struct of the ZNode.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either in ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set"></a>
+    <strong>set (zh, path, buffer, version)</strong>
+    </dt>
+    <dd>
+    sets the data associated with a node. </p>
+
+<p>See set2 function if you require access to the stat information
+associated with the znode.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">buffer</span>
+         the buffer holding data to be written to the node.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the node. The function will fail if
+the actual version of the node does not match the expected version. If -1 is
+used the version check will not take place.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         the return code for the function call.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADVERSION expected version does not match actual version.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set2"></a>
+    <strong>set2 (zh, path, buffer, buflen, version)</strong>
+    </dt>
+    <dd>
+    sets the data associated with a node. </p>
+
+<p>This function is the same
+as set except that it also provides access to stat information
+associated with the znode.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">buffer</span>
+         the buffer holding data to be written to the node.
+        </li>
+        <li><span class="parameter">buflen</span>
+         the number of bytes from buffer to write. To set NULL as data
+use buffer as NULL and buflen as -1.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the node. The function will fail if
+the actual version of the node does not match the expected version. If -1 is
+used the version check will not take place.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): the return code for the function call, 2): stat struct of the ZNode.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADVERSION expected version does not match actual version.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_children"></a>
+    <strong>get_children (zh, path, watch, strings)</strong>
+    </dt>
+    <dd>
+    lists the children of a node synchronously.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init.
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes.
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify.
+the client if the node changes.
+        </li>
+        <li><span class="parameter">strings</span>
+         return value of children paths.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         the return code of the function.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wget_children"></a>
+    <strong>wget_children (zh, path, watcher_fn, watcherctx)</strong>
+    </dt>
+    <dd>
+    lists the children of a node synchronously. </p>
+
+<p>This function is similar to  get_children except it allows one specify
+a watcher object rather than a boolean watch flag.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): the return code of the function, 2): value of children paths.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_children2"></a>
+    <strong>get_children2 (zh, path, watch)</strong>
+    </dt>
+    <dd>
+    lists the children of a node and get its stat synchronously. </p>
+
+<p>This function is new in version 3.3.0
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watch</span>
+         if nonzero, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): the return code of the function, 2): value of children paths, 3): value of node stat.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wget_children2"></a>
+    <strong>wget_children2 (zh, path, watcher_fn, watcherctx)</strong>
+    </dt>
+    <dd>
+    lists the children of a node and get its stat synchronously. </p>
+
+<p>This function is similar to  get_children except it allows one specify
+a watcher object rather than a boolean watch flag.</p>
+
+<p>This function is new in version 3.3.0
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">watcher_fn</span>
+         if non-null, a watch will be set at the server to notify
+the client if the node changes.
+        </li>
+        <li><span class="parameter">watcherctx</span>
+         user specific data, will be passed to the watcher callback.
+Unlike the global context set by  init, this watcher context
+is associated with the given instance of the watcher only.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): the return code of the function, 2): value of children paths, 3): value of node stat.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_acl"></a>
+    <strong>get_acl (zh, path)</strong>
+    </dt>
+    <dd>
+    gets the acl associated with a node synchronously.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         1): the return code for the function call, 2): value of ACLs on the path, 3): stat of the path specified.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "set_acl"></a>
+    <strong>set_acl (zh, path, version, acl)</strong>
+    </dt>
+    <dd>
+    sets the acl associated with a node synchronously.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zh</span>
+         the zookeeper handle obtained by a call to  init
+        </li>
+        <li><span class="parameter">path</span>
+         the name of the node. Expressed as a file name with slashes
+separating ancestors of the node.
+        </li>
+        <li><span class="parameter">version</span>
+         the expected version of the path.
+        </li>
+        <li><span class="parameter">acl</span>
+         the acl to be set on the path.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+         the return code for the function call.
+ZOK operation completed successfully.
+ZNONODE the node does not exist.
+ZNOAUTH the client does not have permission.
+ZINVALIDACL invalid ACL specified.
+ZBADVERSION expected version does not match actual version.
+ZBADARGUMENTS - invalid input parameters.
+ZINVALIDSTATE - zhandle state is either ZOO<em>SESSION</em>EXPIRED<em>STATE or ZOO</em>AUTH<em>FAILED</em>STATE.
+ZMARSHALLINGERROR - failed to marshall a request; possibly, out of memory.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-06-29 14:54:12 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
