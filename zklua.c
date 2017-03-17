@@ -521,6 +521,10 @@ static int zklua_init(lua_State *L)
     _zklua_save_watcherfn(L, 2);
     recv_timeout = luaL_checkint(L, 3);
     switch(top) {
+    case 2:
+      handle->zh = zookeeper_init(host, NULL,
+                                  recv_timeout, 0, wrapper, 0);
+      break;
         case 3:
             wrapper = _zklua_global_watcher_context_init(L, NULL);
             handle->zh = zookeeper_init(host, watcher_dispatch,
